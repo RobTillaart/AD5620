@@ -23,6 +23,9 @@ This library supports both hardware as software SPI.
 
 The library is not tested extensively so use with care.
 
+The library also implements support for the AD5640, a 14 bit DAC.
+
+
 Feedback, issues, improvements are welcome. 
 Please file an issue on GitHub.
 
@@ -43,6 +46,8 @@ Please file an issue on GitHub.
 ```
 
 ### Base class
+
+The AD5640 has identical constructors.
 
 - **AD5620(uint8_t slaveSelect, SPIClassRP2040 \* mySPI = &SPI)** constructor hardware SPI (RP2040 specific). 
 Sets internal value to zero.
@@ -69,6 +74,14 @@ If percentage is out of range, it is not set and the function returns false.
 Might return a slightly different value than **setPercentage()** due to 
 rounding math.
 At power up the function will return 0 as default value.
+
+
+SetValue range and indicative LSB
+
+|  device  |  range     |  LSB @ 5V  |
+|:--------:|:----------:|:----------:|
+|  AD5620  |   0..4095  |  1.221 mV  |
+|  AD5640  |  0..16383  |  0.3053 mV |
 
 
 ### Power down

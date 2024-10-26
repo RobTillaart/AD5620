@@ -76,12 +76,25 @@ protected:
 };
 
 
+
 //////////////////////////////////////////////////////////
 //
 //  DERIVED CLASS
 //
+class AD5640 : public AD5620
+{
+public:
+  //  HARDWARE SPI
+  AD5640(uint8_t slaveSelect, __SPI_CLASS__ * mySPI = &SPI);
+  //  SOFTWARE SPI
+  AD5640(uint8_t slaveSelect, uint8_t spiData, uint8_t spiClock);
 
-//  TODO AD5640
+  bool     setValue(uint16_t value = 0);
+};
+
+
+//  TODO AD5660 ? (need 3 bytes transfer).
+
 
 
 //  -- END OF FILE --

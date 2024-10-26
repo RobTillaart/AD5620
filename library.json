@@ -1,6 +1,6 @@
 {
   "name": "AD5620",
-  "keywords": "DAC, SPI",
+  "keywords": "DAC, SPI, AD5640 (14 bit)",
   "description": "Arduino library for AD5620 Digital Analog Convertor (12 bit).",
   "authors":
   [

@@ -2,6 +2,7 @@
 
 # Data types (KEYWORD1)
 AD5620	KEYWORD1
+AD5640	KEYWORD1
 
 
 # Methods and Functions (KEYWORD2)

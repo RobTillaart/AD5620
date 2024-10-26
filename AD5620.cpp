@@ -194,8 +194,34 @@ void AD5620::swSPI_transfer(uint16_t value)
 //
 //  DERIVED CLASS
 //
+AD5640::AD5640(uint8_t slaveSelect, __SPI_CLASS__ * mySPI)
+       :AD5620(slaveSelect, mySPI)
+{
+  _type      = 14;
+  _maxValue  = 16383;
+}
 
-//  TODO AD5640
+
+//  SOFTWARE SPI
+AD5640::AD5640(uint8_t slaveSelect, uint8_t spiData, uint8_t spiClock)
+       :AD5620(slaveSelect, spiData, spiClock)
+{
+  _type      = 14;
+  _maxValue  = 16383;
+}
+
+
+bool AD5640::setValue(uint16_t value)
+{
+  if (value > _maxValue) return false;
+  _value = value;
+  //  prepare 14 bit transfer.
+  uint16_t data = value;
+  //  set powerMode bits if not 0.
+  if (_powerMode) data |= (_powerMode << 14);
+  updateDevice(data);
+  return true;
+}
 
 
 //  -- END OF FILE --
