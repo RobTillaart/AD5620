@@ -37,13 +37,25 @@ unittest_teardown()
 }
 
 
-unittest(constructors)
+unittest(constructor_AD5620)
 {
-  AD5620 AD0(8, &SPI);    //  18 bit
-  AD5620 AD1(5, 6, 7);    //  18 bit
+  AD5620 AD0(8, &SPI);    //  12 bit
+  AD5620 AD1(5, 6, 7);    //  12 bit
 
   assertTrue(AD0.usesHWSPI());
   assertFalse(AD1.usesHWSPI());
+  assertEqual(4095, AD0.getMaxValue());
+}
+
+
+unittest(constructor_AD5640)
+{
+  AD5640 AD2(8, &SPI);    //  14 bit
+  AD5640 AD3(5, 6, 7);    //  14 bit
+
+  assertTrue(AD0.usesHWSPI());
+  assertFalse(AD1.usesHWSPI());
+  assertEqual(16383, AD0.getMaxValue());
 }
 
 
