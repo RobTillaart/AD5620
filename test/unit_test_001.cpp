@@ -87,14 +87,14 @@ unittest(get_setPowerMode)
   AD0.begin();
 
   // default
-  assertEqual(0, AD0.getPowerMode());
+  assertEqual(0, AD0.getPowerDownMode());
   for (float pm = 0; pm < 4; pm++)
   {
-    assertTrue(AD0.setPowerMode(pm));
-    assertEqual(pm, AD0.getPowerMode());
+    assertTrue(AD0.setPowerDownMode(pm));
+    assertEqual(pm, AD0.getPowerDownMode());
   }
   //  out of range
-  assertFalse(AD0.setPowerMode(4));
+  assertFalse(AD0.setPowerDownMode(4));
 }
 
 
