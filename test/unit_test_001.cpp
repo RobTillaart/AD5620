@@ -55,7 +55,7 @@ unittest(constructor_AD5640)
 
   assertTrue(AD2.usesHWSPI());
   assertFalse(AD3.usesHWSPI());
-  assertEqual(16383, AD0.getMaxValue());
+  assertEqual(16383, AD2.getMaxValue());
 }
 
 
@@ -63,19 +63,37 @@ unittest(get_type)
 {
   AD5620 AD0(8);  //  implicit HW SPI
   assertEqual(12, AD0.getType());
+
+  AD5640 AD0(8);  //  implicit HW SPI
+  assertEqual(14, AD0.getType());
 }
 
 
-unittest(get_setValue)
+unittest(get_setValue_AD5620)
 {
   AD5620 AD0(8);  //  implicit HW SPI
 
   AD0.begin();
   for (int v = 0; v < 2000; v += 100)
   {
-    AD0.setValue(v);
+    assertTrue(AD0.setValue(v));
     assertEqual(v, AD0.getValue());
   }
+  assertFalse(AD0.setValue(4096));
+}
+
+
+unittest(get_setValue_AD5640)
+{
+  AD5640 AD1(8);  //  implicit HW SPI
+
+  AD1.begin();
+  for (int v = 0; v < 2000; v += 100)
+  {
+    assertTrue(AD1.setValue(v));
+    assertEqual(v, AD1.getValue());
+  }
+   assertFalse(AD0.setValue(16384));
 }
 
 
@@ -86,9 +104,10 @@ unittest(get_setPercentage)
   AD0.begin();
   for (float p = 0; p < 100; p += 9)
   {
-    AD0.setPercentage(p);
+    assertTrue((AD0.setPercentage(p));
     assertEqualFloat(p, AD0.getPercentage(), 0.1);
   }
+  assertFalse(AD0.setPercentage(101));
 }
 
 
