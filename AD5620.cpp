@@ -120,7 +120,7 @@ float AD5620::getPercentage()
 //
 bool AD5620::setPowerDownMode(uint8_t mode)
 {
-  if mode > 3) return false;
+  if (mode > 3) return false;
   _powerMode = mode;
   return true;
 }
