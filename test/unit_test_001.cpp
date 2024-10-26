@@ -53,8 +53,8 @@ unittest(constructor_AD5640)
   AD5640 AD2(8, &SPI);    //  14 bit
   AD5640 AD3(5, 6, 7);    //  14 bit
 
-  assertTrue(AD0.usesHWSPI());
-  assertFalse(AD1.usesHWSPI());
+  assertTrue(AD2.usesHWSPI());
+  assertFalse(AD3.usesHWSPI());
   assertEqual(16383, AD0.getMaxValue());
 }
 
