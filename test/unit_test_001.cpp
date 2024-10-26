@@ -64,8 +64,8 @@ unittest(get_type)
   AD5620 AD0(8);  //  implicit HW SPI
   assertEqual(12, AD0.getType());
 
-  AD5640 AD0(8);  //  implicit HW SPI
-  assertEqual(14, AD0.getType());
+  AD5640 AD1(8);  //  implicit HW SPI
+  assertEqual(14, AD1.getType());
 }
 
 
