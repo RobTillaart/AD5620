@@ -93,18 +93,32 @@ unittest(get_setValue_AD5640)
     assertTrue(AD1.setValue(v));
     assertEqual(v, AD1.getValue());
   }
-   assertFalse(AD0.setValue(16384));
+   assertFalse(AD1.setValue(16384));
 }
 
 
-unittest(get_setPercentage)
+unittest(get_setPercentage_AD5620)
 {
   AD5620 AD0(8);  //  implicit HW SPI
 
   AD0.begin();
   for (float p = 0; p < 100; p += 9)
   {
-    assertTrue((AD0.setPercentage(p));
+    assertTrue(AD0.setPercentage(p));
+    assertEqualFloat(p, AD0.getPercentage(), 0.1);
+  }
+  assertFalse(AD0.setPercentage(101));
+}
+
+
+unittest(get_setPercentage_AD5640)
+{
+  AD5640 AD0(8);  //  implicit HW SPI
+
+  AD0.begin();
+  for (float p = 0; p < 100; p += 9)
+  {
+    assertTrue(AD0.setPercentage(p));
     assertEqualFloat(p, AD0.getPercentage(), 0.1);
   }
   assertFalse(AD0.setPercentage(101));
