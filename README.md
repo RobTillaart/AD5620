@@ -71,6 +71,22 @@ rounding math.
 At power up the function will return 0 as default value.
 
 
+### Power down
+
+See datasheet P19 for details.
+
+- **bool setPowerDownMode(uint8_t mode)** returns false if mode is out of range.
+- **uint8_t getPowerDownMode()** returns set power down mode, default 0.
+
+
+|  mode  |  description            |
+|:------:|:------------------------|
+|   0    |  normal mode (default)  |
+|   1    |  1 Kohm to GND          |
+|   2    |  100 Kohm to GND        |
+|   3    |  Threestate             |
+
+
 ### SPI
 
 Adjust the performance of the SPI port.

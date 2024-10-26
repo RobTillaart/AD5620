@@ -80,6 +80,24 @@ unittest(get_setPercentage)
 }
 
 
+unittest(get_setPowerMode)
+{
+  AD5620 AD0(8);  //  implicit HW SPI
+
+  AD0.begin();
+
+  // default
+  assertEqual(0, AD0.getPowerMode());
+  for (float pm = 0; pm < 4; pm++)
+  {
+    assertTrue(AD0.setPowerMode(pm));
+    assertEqual(pm, AD0.getPowerMode());
+  }
+  //  out of range
+  assertFalse(AD0.setPowerMode(4));
+}
+
+
 unittest_main()
 
 
