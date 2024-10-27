@@ -23,6 +23,8 @@ This library supports both hardware as software SPI.
 
 The value of the DAC can be changed by **setValue()** or by **setPercentage()**.
 If the values are out of range these function will return false.
+The value set is kept by the library and can be fetched by **getValue()** 
+and **getPercentage()**.
 
 The library also implements support for the AD5640, a 14 bit DAC.
 
@@ -100,8 +102,8 @@ See datasheet P19 for details.
 |  mode  |  description            |
 |:------:|:------------------------|
 |   0    |  normal mode (default)  |
-|   1    |  1 Kohm to GND          |
-|   2    |  100 Kohm to GND        |
+|   1    |  1 KOhm to GND          |
+|   2    |  100 KOhm to GND        |
 |   3    |  Threestate             |
 
 
@@ -114,7 +116,7 @@ please read datasheet of the ADC first to get optimal speed.
 - **uint32_t getSPIspeed()** gets current speed in **Hz**.
 - **bool usesHWSPI()** returns true if HW SPI is used.
 
-Datasheet max frequency. Overclocking not tested.
+Datasheet maximum frequency. Overclocking is not tested.
 
 |  Voltage  |  Max Speed  |
 |:---------:|:-----------:|
@@ -127,8 +129,9 @@ Datasheet max frequency. Overclocking not tested.
 
 ## Performance
 
-Measurements with AD5620_demo.ino - setValue() most important.
-(numbers are rounded and indicative, other boards might differ).
+Measurements with AD5620_demo.ino - performance of **setValue()** is the 
+most important. The numbers are rounded and indicative, other boards might 
+produce different numbers.
 
 |  version  |  board  |  clock    |  SPI  |  calls / sec  |  Notes  |
 |:---------:|:-------:|:---------:|:-----:|:-------------:|:--------|
@@ -144,6 +147,7 @@ Measurements with AD5620_demo.ino - setValue() most important.
 70000 calls per second means that a 1 KHz wave can be 
 constructed with 70 values per period (max).
 
+Please share your performance data, open an issue to report.
 
 ## Future
 
@@ -156,7 +160,7 @@ constructed with 70 values per period (max).
 #### Should
 
 - add examples
-- create a similar lib for AD5660
+- create a similar library for AD5660
 
 #### Could
 

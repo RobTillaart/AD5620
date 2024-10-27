@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.1.2] - 2024-10-27
-- update readme.md
+- update readme.md and comments
 
 
 ## [0.1.1] - 2024-10-26

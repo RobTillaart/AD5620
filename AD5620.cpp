@@ -72,6 +72,7 @@ uint8_t AD5620::getType()
 //
 bool AD5620::setValue(uint16_t value)
 {
+  //  range check
   if (value > _maxValue) return false;
   _value = value;
   //  prepare 12 bit transfer.
@@ -97,9 +98,10 @@ uint16_t AD5620::getMaxValue()
 
 bool AD5620::setPercentage(float percentage)
 {
+  //  range check
   if ((percentage < 0) || (percentage > 100)) return false;
 
-  uint32_t value = round( 40.95 * percentage);
+  uint32_t value = round(40.95 * percentage);
   return setValue(value);
 }
 
@@ -120,6 +122,7 @@ float AD5620::getPercentage()
 //
 bool AD5620::setPowerDownMode(uint8_t mode)
 {
+  //  range check
   if (mode > 3) return false;
   _powerMode = mode;
   return true;
@@ -213,6 +216,7 @@ AD5640::AD5640(uint8_t slaveSelect, uint8_t spiData, uint8_t spiClock)
 
 bool AD5640::setValue(uint16_t value)
 {
+  //  range check
   if (value > _maxValue) return false;
   _value = value;
   //  prepare 14 bit transfer.
