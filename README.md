@@ -11,7 +11,7 @@
 
 # AD5620
 
-Arduino library for the AD5620 series digital analog convertor (12 bit).
+Arduino library for the AD5620 / AD5640 Digital Analog Convertor (12/14 bit).
 
 
 ## Description
@@ -21,13 +21,26 @@ Arduino library for the AD5620 series digital analog convertor (12 bit).
 The AD5620 is a 12 bit DAC, which is to be controlled by SPI.
 This library supports both hardware as software SPI.
 
-The library is not tested extensively so use with care.
+The value of the DAC can be changed by **setValue()** or by **setPercentage()**.
+If the values are out of range these function will return false.
 
 The library also implements support for the AD5640, a 14 bit DAC.
 
+** Warning** The library is not tested with hardware so use with care.
 
 Feedback, issues, improvements are welcome. 
 Please file an issue on GitHub.
+
+
+### Compatibles 
+
+Overview devices, nr of bits, setValue range and indicative LSB
+
+|  device  |  bits  |  range      |  LSB @ 5V   |  notes  |
+|:--------:|:------:|:-----------:|:-----------:|:-------:|
+|  AD5620  |   12   |  0..4095    |  1.221 mV   |  
+|  AD5640  |   14   |  0..16383   |  0.3053 mV  |
+|  AD5660  |   16   |  0..262143  |  19.07 uV   |  almost compatible, not supported.
 
 
 ### Related
@@ -57,7 +70,7 @@ Sets internal value to zero.
 Sets the software SPI pins.
 Sets internal value to zero.
 - **void begin()** initializes the SPI and sets internal state.
-- **uint8_t getType()** returns 12 for AD5620.
+- **uint8_t getType()** returns nr of bits, 12 for AD5620, 14 for AD5640.
 
 
 ### Set DAC
@@ -65,23 +78,15 @@ Sets internal value to zero.
 - **bool setValue(uint16_t value)** set value to the output immediately, 
 effectively a prepare + update in one call.
 Returns false if value out of range.
-- **uint16_t getValue()** returns set value 0..262143 (from cache).
-At power up the AD5620 will be reset to 0 (== 0 volt).
-- **uint16_t getMaxValue()** returns 4095 for AD5620.
-- **bool setPercentage(float percentage)** sets the output as a percentage 0..100.
-If percentage is out of range, it is not set and the function returns false.
+- **uint16_t getValue()** returns the set value from cache.
+At power up the device will be reset to 0 (== 0 volt).
+- **uint16_t getMaxValue()** returns 4095 for AD5620, returns 16383 for AD5640.
+- **bool setPercentage(float percentage)** sets the output as a percentage 0..100%.
+If percentage is out of range, it is **not** set and the function returns false.
 - **float getPercentage()** returns percentage, wrapper around **getValue()**.
 Might return a slightly different value than **setPercentage()** due to 
 rounding math.
 At power up the function will return 0 as default value.
-
-
-SetValue range and indicative LSB
-
-|  device  |  range     |  LSB @ 5V  |
-|:--------:|:----------:|:----------:|
-|  AD5620  |   0..4095  |  1.221 mV  |
-|  AD5640  |  0..16383  |  0.3053 mV |
 
 
 ### Power down
@@ -126,7 +131,7 @@ Measurements with AD5620_demo.ino - setValue() most important.
 (numbers are rounded and indicative, other boards might differ).
 
 |  version  |  board  |  clock    |  SPI  |  calls / sec  |  Notes  |
-|:---------:|:-------:}:---------:|:-----:}:--------- ---:|:--------|
+|:---------:|:-------:|:---------:|:-----:|:-------------:|:--------|
 |   0.1.0   |  UNO    |   16 MHz  |  HW   |    70900      |  max SPI speed
 |   0.1.0   |  UNO    |   16 MHz  |  SW   |     5289      |
 |   0.1.0   |  ESP32  |  240 MHz  |  HW   |               |  1
@@ -151,9 +156,9 @@ constructed with 70 values per period (max).
 #### Should
 
 - add examples
+- create a similar lib for AD5660
 
 #### Could
-
 
 
 #### Wont
