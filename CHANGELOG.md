@@ -6,11 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.1.3] - 2024-11-18
+## [0.2.0] - 2024-11-18
 - fix #9 low level protocol. Send 3 bytes instead of 2.
 - fix percentage functions AD5640
 - update readme.md
 
+----
 
 ## [0.1.2] - 2024-10-27
 - update readme.md and comments

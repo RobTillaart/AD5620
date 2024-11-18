@@ -28,10 +28,17 @@ and **getPercentage()**.
 
 The library also implements support for the AD5640, a 14 bit DAC.
 
-**Warning** The library is not tested with hardware so use with care.
+**Warning** The library is not tested (under test) with hardware.
+So it should be used with care.
 
 Feedback, issues, improvements are welcome. 
 Please file an issue on GitHub.
+
+
+### Breaking change 0.2.0
+
+Pre 0.2.0 versions are not sending 3 bytes as they should (See #9).
+Therefore the pre 0.2.0 versions are obsolete.
 
 
 ### Differences.
@@ -45,19 +52,20 @@ and remains there until a valid write takes place.
 
 ### Compatibles 
 
-Overview devices, nr of bits, setValue range and indicative LSB
+Overview devices, number of bits, setValue range and indicative LSB
 
-|  device  |  bits  |  range      |  % stepsize  |  LSB @ 5V   |  notes  |
-|:--------:|:------:|:-----------:|:------------:|:-----------:|:-------:|
-|  AD5620  |   12   |  0..4095    |    0.025     |  1.221 mV   |  
-|  AD5640  |   14   |  0..16383   |    0.0065    |  0.3053 mV  |
-|  AD5660  |   16   |  0..65535   |    0.0017    |  0.0763 mV  |  see AD5660 library
-|  AD5680  |   16   |  0..262143  |    0.0005    |  19.07 uV   |  see AD5680 library
+|  device  |  bits  |  range      |  % step size  |  LSB @ 5V   |  notes  |
+|:--------:|:------:|:-----------:|:-------------:|:-----------:|:-------:|
+|  AD5620  |   12   |  0..4095    |     0.025     |  1.221 mV   |  
+|  AD5640  |   14   |  0..16383   |     0.0065    |  0.3053 mV  |
+|  AD5660  |   16   |  0..65535   |     0.0017    |  0.0763 mV  |  see AD5660 library
+|  AD5680  |   18   |  0..262143  |     0.0005    |  19.07 uV   |  see AD5680 library
 
 
 ### Related
 
-- https://github.com/RobTillaart/AD5620 (single channel, 12 bit)
+- https://github.com/RobTillaart/AD5620 (single channel, 12 + 14 bit)
+- https://github.com/RobTillaart/AD5660 (single channel, 16 bit)
 - https://github.com/RobTillaart/AD5680 (single channel, 18 bit)
 - https://github.com/RobTillaart/AD56x8 (multi channel)
 - https://github.com/RobTillaart/AD568X (single channel lower resolution)
@@ -146,19 +154,25 @@ produce different numbers.
 
 |  version  |  board  |  clock    |  SPI  |  calls / sec  |  Notes  |
 |:---------:|:-------:|:---------:|:-----:|:-------------:|:--------|
-|   0.1.0   |  UNO    |   16 MHz  |  HW   |    70900      |  max SPI speed
-|   0.1.0   |  UNO    |   16 MHz  |  SW   |     5289      |
-|   0.1.0   |  ESP32  |  240 MHz  |  HW   |               |  1
-|   0.1.0   |  ESP32  |  240 MHz  |  SW   |               |
+|   0.2.0   |  UNO    |   16 MHz  |  HW   |    55000      |  max SPI speed
+|   0.2.0   |  UNO    |   16 MHz  |  SW   |     3369      |  
+|   0.2.0   |  ESP32  |  240 MHz  |  HW   |               |  1
+|   0.2.0   |  ESP32  |  240 MHz  |  SW   |               |
 
 
 1. ESP32 HW is equal performant for HSPI and VSPI. 
    Unknown why HW SPI is 20% slower than SW SPI (transaction overhead?)
 
-70000 calls per second means that a 1 KHz wave can be 
-constructed with 70 values per period (max).
+(pre-0.2.0 versions obsolete)
+
+55000 calls per second means that a 1 KHz wave can be 
+constructed with 55 values per period (max).
+
+3369 calls per second means that a 1 KHz wave can be 
+constructed with ~3 values per period (max).
 
 Please share your performance data, open an issue to report.
+
 
 ## Future
 
