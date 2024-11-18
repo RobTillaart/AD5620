@@ -34,15 +34,25 @@ Feedback, issues, improvements are welcome.
 Please file an issue on GitHub.
 
 
+### Differences.
+
+The parts incorporate a power-on reset circuit to ensure that the DAC output 
+powers up to 
+- 0 V (AD5620/AD5640/AD5660-1-2) or 
+- midscale (AD5620-3 and AD5660-3) 
+
+and remains there until a valid write takes place.
+
 ### Compatibles 
 
 Overview devices, nr of bits, setValue range and indicative LSB
 
-|  device  |  bits  |  range      |  LSB @ 5V   |  notes  |
-|:--------:|:------:|:-----------:|:-----------:|:-------:|
-|  AD5620  |   12   |  0..4095    |  1.221 mV   |  
-|  AD5640  |   14   |  0..16383   |  0.3053 mV  |
-|  AD5660  |   16   |  0..262143  |  19.07 uV   |  almost compatible, not supported.
+|  device  |  bits  |  range      |  % stepsize  |  LSB @ 5V   |  notes  |
+|:--------:|:------:|:-----------:|:------------:|:-----------:|:-------:|
+|  AD5620  |   12   |  0..4095    |    0.025     |  1.221 mV   |  
+|  AD5640  |   14   |  0..16383   |    0.0065    |  0.3053 mV  |
+|  AD5660  |   16   |  0..65535   |    0.0017    |  0.0763 mV  |  see AD5660 library
+|  AD5680  |   16   |  0..262143  |    0.0005    |  19.07 uV   |  see AD5680 library
 
 
 ### Related
@@ -81,10 +91,11 @@ Sets internal value to zero.
 effectively a prepare + update in one call.
 Returns false if value out of range.
 - **uint16_t getValue()** returns the set value from cache.
-At power up the device will be reset to 0 (== 0 volt).
+At power up the device will be reset to 0 (== 0 volt). (not always).
 - **uint16_t getMaxValue()** returns 4095 for AD5620, returns 16383 for AD5640.
 - **bool setPercentage(float percentage)** sets the output as a percentage 0..100%.
 If percentage is out of range, it is **not** set and the function returns false.
+The step size is 0.025% for the AD5620.
 - **float getPercentage()** returns percentage, wrapper around **getValue()**.
 Might return a slightly different value than **setPercentage()** due to 
 rounding math.
@@ -104,7 +115,7 @@ See datasheet P19 for details.
 |   0    |  normal mode (default)  |
 |   1    |  1 KOhm to GND          |
 |   2    |  100 KOhm to GND        |
-|   3    |  Threestate             |
+|   3    |  ThreeState             |
 
 
 ### SPI
@@ -116,7 +127,7 @@ please read datasheet of the ADC first to get optimal speed.
 - **uint32_t getSPIspeed()** gets current speed in **Hz**.
 - **bool usesHWSPI()** returns true if HW SPI is used.
 
-Datasheet maximum frequency. Overclocking is not tested.
+Datasheet P7, maximum frequency. Overclocking is not tested.
 
 |  Voltage  |  Max Speed  |
 |:---------:|:-----------:|
