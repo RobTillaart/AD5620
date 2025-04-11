@@ -184,10 +184,10 @@ void AD5620::updateDevice(uint16_t data)
 //  simple one mode version
 void AD5620::swSPI_transfer(uint16_t value)
 {
-  uint8_t clk = _clock;
-  uint8_t dao = _dataOut;
+  int clk = _clock;
+  int dao = _dataOut;
   //  Shifting 16 bits starting from MSB to LSB
-  for (uint32_t mask = 0x8000; mask; mask >>= 1)
+  for (uint16_t mask = 0x8000; mask; mask >>= 1)
   {
     digitalWrite(dao,(value & mask)? HIGH : LOW);
     digitalWrite(clk, HIGH);
