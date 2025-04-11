@@ -35,6 +35,13 @@ Feedback, issues, improvements are welcome.
 Please file an issue on GitHub.
 
 
+### Breaking change 0.3.0
+
+Reverted the 0.2.0 change as the 3 bytes was only for the AD5660 which is not 
+a supported class in this library. See #12.
+Therefore the pre 0.3.0 versions are obsolete.
+
+
 ### Breaking change 0.2.0
 
 Pre 0.2.0 versions are not sending 3 bytes as they should (See #9).
@@ -49,6 +56,7 @@ powers up to
 - midscale (AD5620-3 and AD5660-3) 
 
 and remains there until a valid write takes place.
+
 
 ### Compatibles 
 
