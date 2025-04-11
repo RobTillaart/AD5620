@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.3.0] - 2025-01-20
-- fix #12, redo transfer functions.
+- fix #12, redo transfer functions. Thanks to jul-brn.
+- fix SPI mode, 0-> 1
 - minor edits
 - update readme.md
 

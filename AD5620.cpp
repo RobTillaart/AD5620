@@ -43,7 +43,7 @@ void AD5620::begin()
   pinMode(_select, OUTPUT);
   digitalWrite(_select, HIGH);
 
-  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE0);
+  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE1);
 
   if (_hwSPI)
   {
@@ -142,7 +142,7 @@ uint8_t AD5620::getPowerDownMode()
 void AD5620::setSPIspeed(uint32_t speed)
 {
   _SPIspeed = speed;
-  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE0);
+  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE1);
 };
 
 
